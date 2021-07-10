@@ -1,13 +1,16 @@
 import random
 
 print("H A N G M A N")
-print("The game will be available soon.")
 
 words = ['python', 'java', 'kotlin', 'javascript']
 
 secret = random.choice(words)
 
-guess = input()
+tip = secret[:3]
+length = len(secret) - len(tip)
+hyphens = '-' * length
+
+guess = input(f"Guess the word {tip}{hyphens}: ")
 
 if guess == secret:
     print("You survived!")
