@@ -1,11 +1,6 @@
 type: edu
 custom_name: Error!
 files:
-- name: hangman/hangman.py
-  visible: true
-  text: |
-    # Write your code here
-  learner_created: false
 - name: tests.py
   visible: false
   text: |
@@ -307,6 +302,14 @@ files:
     if __name__ == '__main__':
         CoffeeMachineTest('hangman.hangman').run_tests()
   learner_created: false
+- name: hangman/hangman.py
+  visible: true
+  text: |
+    # Write your code here
+  learner_created: false
 feedback_link: https://hyperskill.org/projects/69/stages/378/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sun, 11 Jul 2021 15:22:09 UTC
 record: 7

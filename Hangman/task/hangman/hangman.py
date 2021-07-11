@@ -1,45 +1,54 @@
 import random
+import string
+
+# setting variables
+words = ['python', 'java', 'kotlin', 'javascript']  # list of words
+secret = random.choice(words)  # random word
+attempts = 8  # game tries
+guessed_secret = secret  # used to determine which letters guessed in the secret
+guessed_letters = set()  # storing letters which user tried
+guessed = False
+pattern = '-' * len(secret)
 
 print("H A N G M A N")
-
-words = ['python', 'java', 'kotlin', 'javascript']
-
-secret = random.choice(words)
-not_guessed_secret = secret
-attempts = 8
-guessed = False
-
-p = '-' * len(secret)
-
 print()
-print(p)
-i = 0
+print(pattern)
 
+i = 0  # for first try output style
 while attempts > 0 and not guessed:
-    # for styling output
+    guess_letter = ''
     if i == 0:
-        guessed_letter = input("Input a letter ")
+        guess_letter = input("Input a letter ")
         i += 1
     else:
         print()
         print()
-        print(p)
-        guessed_letter = input("Input a letter ")
+        print(pattern)
+        guess_letter = input("Input a letter ")
 
-    if guessed_letter in secret:
-        if guessed_letter not in not_guessed_secret:
-            attempts -= 1
-            print("No improvements")
-        while guessed_letter in not_guessed_secret:
-            position = not_guessed_secret.find(guessed_letter)
-            not_guessed_secret = not_guessed_secret.replace(guessed_letter, '*', 1)
-            new_character = guessed_letter
-            p = p[:position] + new_character + p[position + 1:]
+    # check letter requirements
+    if len(guess_letter) != 1:
+        print("You should input a single letter")
+        continue
+    if guess_letter not in list(string.ascii_lowercase):
+        print("Please enter a lowercase English letter")
+        continue
+
+    # playing
+    if guess_letter in guessed_letters:
+        print("You've already guessed this letter")
     else:
-        attempts -= 1
-        print("That letter doesn't appear in the word")
+        guessed_letters.add(guess_letter)
+        if guess_letter in secret:
+            while guess_letter in guessed_secret:
+                position = guessed_secret.find(guess_letter)
+                guessed_secret = guessed_secret.replace(guess_letter, '*', 1)
+                pattern = pattern[:position] + guess_letter + pattern[position + 1:]
+        else:
+            attempts -= 1
+            print("That letter doesn't appear in the word")
 
-    if not_guessed_secret == '*' * len(secret):
+    if guessed_secret == '*' * len(guessed_secret):
         guessed = True
 
 if guessed:
